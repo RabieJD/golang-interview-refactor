@@ -5,14 +5,20 @@ import (
 	"gorm.io/gorm"
 	"interview/pkg/entity"
 	"interview/pkg/infra/database/cart"
+	"interview/pkg/infra/database/connection"
 )
 
 type repo struct {
 	db *gorm.DB
 }
 
-func NewRepo(db *gorm.DB) cart.Handler {
-	return &repo{db: db}
+func NewRepo(db *gorm.DB) (cart.Handler, connection.Migration) {
+	r := &repo{db: db}
+	return r, r
+}
+
+func (r *repo) Migrate() error {
+	return r.db.AutoMigrate(&Cart{}, &CartItem{})
 }
 
 // AddCart adds a New cart to database
