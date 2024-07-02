@@ -39,13 +39,13 @@ func runTestCases(t *testing.T, cases []td.TestCase, testFunc func(tc td.TestCas
 func TestRepo_AddCart(t *testing.T) {
 	db, mock, err := setupMockDB()
 	assert.NoError(t, err)
-	repo := NewRepo(db)
+	repo, _ := NewRepo(db)
 
 	testCases := td.GenerateADDCartTT()
 
 	runTestCases(t, testCases, func(tc td.TestCase) {
 		tc.Mock(mock)
-		err := repo.AddCart(context.TODO(), tc.Args.(entity.CartEntity))
+		err := repo.AddCart(context.TODO(), tc.Args.(*entity.CartEntity))
 		if tc.HasError {
 			assert.Error(t, err)
 		} else {
@@ -58,13 +58,13 @@ func TestRepo_AddCart(t *testing.T) {
 func TestRepo_UpdateCart(t *testing.T) {
 	db, mock, err := setupMockDB()
 	assert.NoError(t, err)
-	repo := NewRepo(db)
+	repo, _ := NewRepo(db)
 
 	testCases := td.GenerateUpdateCartTT()
 
 	runTestCases(t, testCases, func(tc td.TestCase) {
 		tc.Mock(mock)
-		err := repo.UpdateCart(context.TODO(), tc.Args.(entity.CartEntity))
+		err := repo.UpdateCart(context.TODO(), tc.Args.(*entity.CartEntity))
 		if tc.HasError {
 			assert.Error(t, err)
 		} else {
@@ -77,13 +77,13 @@ func TestRepo_UpdateCart(t *testing.T) {
 func TestRepo_AddItem(t *testing.T) {
 	db, mock, err := setupMockDB()
 	assert.NoError(t, err)
-	repo := NewRepo(db)
+	repo, _ := NewRepo(db)
 
 	testCases := td.GenerateAddItemTT()
 
 	runTestCases(t, testCases, func(tc td.TestCase) {
 		tc.Mock(mock)
-		err := repo.AddItem(context.TODO(), tc.Args.(entity.CartItem))
+		err := repo.AddItem(context.TODO(), tc.Args.(*entity.CartItem))
 		if tc.HasError {
 			assert.Error(t, err)
 		} else {
@@ -96,13 +96,13 @@ func TestRepo_AddItem(t *testing.T) {
 func TestRepo_UpdateItem(t *testing.T) {
 	db, mock, err := setupMockDB()
 	assert.NoError(t, err)
-	repo := NewRepo(db)
+	repo, _ := NewRepo(db)
 
 	testCases := td.GenerateUpdateItemTT()
 
 	runTestCases(t, testCases, func(tc td.TestCase) {
 		tc.Mock(mock)
-		err := repo.UpdateItem(context.TODO(), tc.Args.(entity.CartItem))
+		err := repo.UpdateItem(context.TODO(), tc.Args.(*entity.CartItem))
 		if tc.HasError {
 			assert.Error(t, err)
 		} else {
@@ -115,7 +115,7 @@ func TestRepo_UpdateItem(t *testing.T) {
 func TestRepo_GetCartBySessionID(t *testing.T) {
 	db, mock, err := setupMockDB()
 	assert.NoError(t, err)
-	repo := NewRepo(db)
+	repo, _ := NewRepo(db)
 
 	testCases := td.GenerateGetCartBySessionIDTT()
 
@@ -134,7 +134,7 @@ func TestRepo_GetCartBySessionID(t *testing.T) {
 func TestRepo_GetItemByCartIDAndName(t *testing.T) {
 	db, mock, err := setupMockDB()
 	assert.NoError(t, err)
-	repo := NewRepo(db)
+	repo, _ := NewRepo(db)
 
 	testCases := td.GenerateGetItemByCartIDAndNameTT()
 
@@ -153,7 +153,7 @@ func TestRepo_GetItemByCartIDAndName(t *testing.T) {
 func TestRepo_GetItemsByCartID(t *testing.T) {
 	db, mock, err := setupMockDB()
 	assert.NoError(t, err)
-	repo := NewRepo(db)
+	repo, _ := NewRepo(db)
 
 	testCases := td.GenerateGetItemsByCartIDTT()
 
@@ -172,7 +172,7 @@ func TestRepo_GetItemsByCartID(t *testing.T) {
 func TestRepo_DeleteItem(t *testing.T) {
 	db, mock, err := setupMockDB()
 	assert.NoError(t, err)
-	repo := NewRepo(db)
+	repo, _ := NewRepo(db)
 
 	testCases := td.GenerateDeleteItemTT()
 

@@ -26,7 +26,7 @@ func GenerateADDCartTT() []TestCase {
 					WillReturnResult(sqlmock.NewResult(1, 1))
 				mock.ExpectCommit()
 			},
-			Args: entity.CartEntity{
+			Args: &entity.CartEntity{
 				Total:     100.0,
 				SessionID: "session1",
 				Status:    "open",
@@ -42,7 +42,7 @@ func GenerateADDCartTT() []TestCase {
 					WillReturnError(errors.New("insert error"))
 				mock.ExpectRollback()
 			},
-			Args: entity.CartEntity{
+			Args: &entity.CartEntity{
 				Total:     100.0,
 				SessionID: "session1",
 				Status:    "open",
@@ -63,7 +63,7 @@ func GenerateUpdateCartTT() []TestCase {
 					WillReturnResult(sqlmock.NewResult(1, 1))
 				mock.ExpectCommit()
 			},
-			Args: sql.Cart{
+			Args: &entity.CartEntity{
 				Model:     gorm.Model{ID: 1},
 				Total:     150.0,
 				SessionID: "session1",
@@ -80,7 +80,7 @@ func GenerateUpdateCartTT() []TestCase {
 					WillReturnError(errors.New("update error"))
 				mock.ExpectRollback()
 			},
-			Args: sql.Cart{
+			Args: &entity.CartEntity{
 				Model:     gorm.Model{ID: 1},
 				Total:     150.0,
 				SessionID: "session1",
@@ -103,7 +103,7 @@ func GenerateAddItemTT() []TestCase {
 					WillReturnResult(sqlmock.NewResult(1, 1))
 				mock.ExpectCommit()
 			},
-			Args: sql.CartItem{
+			Args: &entity.CartItem{
 				ProductName: "Product1",
 				Quantity:    2,
 				Price:       10.0,
@@ -119,7 +119,7 @@ func GenerateAddItemTT() []TestCase {
 					WillReturnError(errors.New("insert error"))
 				mock.ExpectRollback()
 			},
-			Args: sql.CartItem{
+			Args: &entity.CartItem{
 				ProductName: "Product1",
 				Quantity:    2,
 				Price:       10.0,
@@ -140,7 +140,7 @@ func GenerateUpdateItemTT() []TestCase {
 					WillReturnResult(sqlmock.NewResult(1, 1))
 				mock.ExpectCommit()
 			},
-			Args: sql.CartItem{
+			Args: &entity.CartItem{
 				Model:       gorm.Model{ID: 1},
 				ProductName: "Product1",
 				Quantity:    3,
@@ -157,7 +157,7 @@ func GenerateUpdateItemTT() []TestCase {
 					WillReturnError(errors.New("update error"))
 				mock.ExpectRollback()
 			},
-			Args: sql.CartItem{
+			Args: &entity.CartItem{
 				Model:       gorm.Model{ID: 1},
 				ProductName: "Product1",
 				Quantity:    3,

@@ -22,30 +22,34 @@ func (r *repo) Migrate() error {
 }
 
 // AddCart adds a New cart to database
-func (r *repo) AddCart(ctx context.Context, cart entity.CartEntity) error {
-	dbCart := CartEntityToDBCart(cart)
+func (r *repo) AddCart(ctx context.Context, cart *entity.CartEntity) error {
+	dbCart := CartEntityToDBCart(*cart)
 	result := r.db.WithContext(ctx).Create(&dbCart)
+	cart.ID = dbCart.ID
 	return result.Error
 }
 
 // UpdateCart updates an existing cart in database, if not existing, it inserts it
-func (r *repo) UpdateCart(ctx context.Context, cart entity.CartEntity) error {
-	dbCart := CartEntityToDBCart(cart)
+func (r *repo) UpdateCart(ctx context.Context, cart *entity.CartEntity) error {
+	dbCart := CartEntityToDBCart(*cart)
 	result := r.db.WithContext(ctx).Save(&dbCart)
+	cart.ID = dbCart.ID
 	return result.Error
 }
 
 // AddItem adds a new item to database
-func (r *repo) AddItem(ctx context.Context, item entity.CartItem) error {
-	dbItem := CartItemToDBCartItem(item)
+func (r *repo) AddItem(ctx context.Context, item *entity.CartItem) error {
+	dbItem := CartItemToDBCartItem(*item)
 	result := r.db.WithContext(ctx).Create(&dbItem)
+	item.ID = dbItem.CartID
 	return result.Error
 }
 
 // UpdateItem updates an existing item in database, if not existing, it inserts it
-func (r *repo) UpdateItem(ctx context.Context, item entity.CartItem) error {
-	dbItem := CartItemToDBCartItem(item)
+func (r *repo) UpdateItem(ctx context.Context, item *entity.CartItem) error {
+	dbItem := CartItemToDBCartItem(*item)
 	result := r.db.WithContext(ctx).Save(&dbItem)
+	item.ID = dbItem.CartID
 	return result.Error
 }
 
