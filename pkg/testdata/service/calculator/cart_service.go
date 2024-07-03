@@ -88,13 +88,13 @@ func GenerateTTAddItem() []TTAddItem {
 			SessionID: "session123",
 			SetupMocks: func(cartRepo *CartRepoMock, priceRepo *PriceRepoMock) {
 				priceRepo.GetPriceFunc = func(identifier string) (float64, error) {
-					return 0, errors.New("invalid item Name")
+					return 0, errors.New("invalid item name")
 				}
 				cartRepo.GetCartBySessionIDFunc = validGetCartBySessionID
 				cartRepo.GetItemByCartIDAndNameFunc = validGetItemByCartIDAndName
 			},
 			ExpectedStatus: 302,
-			ExpectedErr:    errors.New("invalid item Name"),
+			ExpectedErr:    errors.New("invalid item name"),
 		},
 		{
 			Name: "Invalid Quantity",

@@ -27,20 +27,21 @@ type TTMigrateDB struct {
 }
 
 func GenerateTTMigrateDB() []TTMigrateDB {
+	cn := int32(1)
 	return []TTMigrateDB{
 		{
 			Name: "All migrations succeed",
 			Migrations: []connection.Migration{
-				&MockMigration{ShouldFail: false},
-				&MockMigration{ShouldFail: false},
+				&MockMigration{ShouldFail: false, CalledNB: &cn},
+				&MockMigration{ShouldFail: false, CalledNB: &cn},
 			},
 			HasError: false,
 		},
 		{
 			Name: "One migration fails",
 			Migrations: []connection.Migration{
-				&MockMigration{ShouldFail: false},
-				&MockMigration{ShouldFail: true},
+				&MockMigration{ShouldFail: false, CalledNB: &cn},
+				&MockMigration{ShouldFail: true, CalledNB: &cn},
 			},
 			HasError: true,
 		},
