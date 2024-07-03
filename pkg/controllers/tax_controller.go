@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	addItemsFormSource = "../../static/add_item_form.html"
+	addItemsFormSource = "static/add_item_form.html"
 	sessionIDKey       = "ice_session_id"
 )
 

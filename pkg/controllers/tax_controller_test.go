@@ -8,10 +8,12 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"os"
 	"testing"
 )
 
 func TestTaxController_AddItem(t *testing.T) {
+	assert.NoError(t, os.Chdir("../.."))
 	for _, tt := range td.GenerateTTAddItem() {
 		t.Run(tt.Name, func(t *testing.T) {
 			mockHandler := &td.CalculatorHandlerMock{}
