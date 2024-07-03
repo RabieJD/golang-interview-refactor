@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"interview/pkg/config"
 	"interview/pkg/controllers"
@@ -46,7 +47,7 @@ func main() {
 
 	// run server
 	srv := &http.Server{
-		Addr:    ":8088",
+		Addr:    fmt.Sprintf("%s:%s", conf.Server.Host, conf.Server.Port),
 		Handler: ginEngine,
 	}
 

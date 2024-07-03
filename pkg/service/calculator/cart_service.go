@@ -69,7 +69,7 @@ func (c *cartService) saveItem(ctx context.Context, cartID uint, itemForm contro
 	if err != nil {
 		return errors.New("invalid quantity")
 	}
-	itemToSave := entity.CartItem{CartID: cartID}
+	itemToSave := entity.CartItem{CartID: cartID, ProductName: itemForm.Product}
 	if oldItem != nil {
 		itemToSave = *oldItem
 	}

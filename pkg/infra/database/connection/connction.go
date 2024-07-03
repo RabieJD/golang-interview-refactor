@@ -11,7 +11,7 @@ const databaseConnectionExtraParameters = "charset=utf8mb4&parseTime=True&loc=Lo
 func GetDBConnection(conf *DatabaseConnection) (*gorm.DB, error) {
 	// MySQL connection string
 	// Update the username, password, host, port, and database name accordingly
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)%s?%s",
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?%s",
 		conf.Username,
 		conf.Password,
 		conf.Host,
